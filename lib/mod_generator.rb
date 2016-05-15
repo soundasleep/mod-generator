@@ -18,9 +18,11 @@ class ModGenerator
     CategoryGenerator.new(target, data).generate!
     ItemGenerator.new(target, data).generate!
     RecipeGenerator.new(target, data).generate!
+    TechnologyGenerator.new(target, data).generate!
 
     ImagesGenerator.new(target, data).generate!
     CategoryImagesGenerator.new(target, data).generate!
+    TechnologyImagesGenerator.new(target, data).generate!
   end
 
   private
@@ -49,6 +51,7 @@ class ModGenerator
     require("prototypes.category")
     require("prototypes.items")
     require("prototypes.recipes")
+    require("prototypes.technology")
 
     data.raw.item["raw-wood"].stack_size = 100
     '

@@ -44,9 +44,6 @@ class RecipeGenerator
       results: to_ingredients(recipe.results),
       order: recipe.order,
       icon: mod_path(recipe.icon),
-
-      # order: recipe.order,
-      # icon: mod_path(recipe.icon),
     }
   end
 

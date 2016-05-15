@@ -19,7 +19,15 @@ class ModData
   def recipes
     [
       CreateStarItem.new,
-      CreateBiggerStarItem.new
+      CreateBiggerStarItem.new,
+      CheatingRecipe.new,
+    ]
+  end
+
+  def technologies
+    [
+      SimpleTechnology.new,
+      UnlockAllTheThings.new,
     ]
   end
 
@@ -171,12 +179,6 @@ class ModRecipe < GenericItem
   end
 end
 
-class RawWood < ModItem
-  def type
-    "item"
-  end
-end
-
 def raw_items
   [
     # demo-item.lua
@@ -204,7 +206,14 @@ def raw_items
     "science-pack-3", "small-pump", "smart-chest", "smart-inserter", "solar-panel", "solid-fuel",
     "steel-chest", "steel-furnace", "steel-plate", "storage-tank", "straight-rail", "substation", "sulfur",
     "tank", "train-stop",
+
+    # mining-tools.lua
+    "steel-axe",
   ]
+end
+
+def raw_recipes
+  raw_items
 end
 
 class RawItem < ModItem
@@ -225,6 +234,22 @@ def raw_item(key)
   fail "Unknown raw item '#{key}'" unless raw_items.include?(key)
 
   RawItem.new(key)
+end
+
+class RawRecipe < ModRecipe
+  def initialize(name)
+    @name = name
+  end
+
+  def name
+    @name
+  end
+end
+
+def raw_recipe(key)
+  fail "Unknown raw recipe '#{key}'" unless raw_recipes.include?(key)
+
+  RawRecipe.new(key)
 end
 
 class CreateStarItem < ModRecipe
@@ -252,7 +277,7 @@ end
 class CreateBiggerStarItem < ModRecipe
   def ingredients
     [
-      [2, RawWood.new],
+      [2, raw_item("raw-wood")],
     ]
   end
 
@@ -270,12 +295,16 @@ class CreateBiggerStarItem < ModRecipe
   def craftable_by
     :chemistry
   end
+
+  def enabled
+    false
+  end
 end
 
-class CreateBiggerStarItem < ModRecipe
+class CheatingRecipe < ModRecipe
   def ingredients
     [
-      [1, RawWood.new],
+      [1, raw_item("raw-wood")],
     ]
   end
 
@@ -289,6 +318,11 @@ class CreateBiggerStarItem < ModRecipe
       [100, raw_item("electronic-circuit")],
       [100, raw_item("advanced-circuit")],
       [100, raw_item("plastic-bar")],
+      [10, raw_item("lab")],
+      [50, raw_item("solar-panel")],
+      [50, raw_item("big-electric-pole")],
+      [50, raw_item("science-pack-1")],
+      [50, raw_item("science-pack-2")],
     ]
   end
 
@@ -298,6 +332,95 @@ class CreateBiggerStarItem < ModRecipe
 
   def craftable_by
     :hand
+  end
+end
+
+class ModTechnology < GenericItem
+  # default: at end
+  def order
+    "z-z"
+  end
+
+  # default: at end
+  def inventory_order
+    "z-z"
+  end
+
+  def icon
+    "graphics/technology/default.png"
+  end
+
+  def prerequisites
+    []
+  end
+
+  def unlocked_recipes
+    []
+  end
+
+  def ingredient_count
+    75
+  end
+
+  def research_time
+    30
+  end
+end
+
+class SimpleTechnology < ModTechnology
+  def ingredients
+    [
+      [1, raw_item("science-pack-1")],
+    ]
+  end
+
+  def ingredient_count
+    1
+  end
+
+  def research_time
+    1
+  end
+end
+
+class UnlockAllTheThings < ModTechnology
+  def prerequisites
+    [
+      SimpleTechnology.new,
+    ]
+  end
+
+  def ingredients
+    [
+      [1, raw_item("science-pack-1")],
+    ]
+  end
+
+  def ingredient_count
+    1
+  end
+
+  def research_time
+    1
+  end
+
+  def unlocked_recipes
+    [
+      CreateBiggerStarItem.new,
+      raw_recipe("steel-plate"),
+      raw_recipe("steel-axe"),
+      raw_recipe("assembling-machine-1"),
+      raw_recipe("assembling-machine-2"),
+      raw_recipe("assembling-machine-3"),
+      raw_recipe("electronic-circuit"),
+      raw_recipe("advanced-circuit"),
+      raw_recipe("processing-unit"),
+      raw_recipe("science-pack-3"),
+      raw_recipe("fast-inserter"),
+      raw_recipe("stone-wall"),
+      raw_recipe("solar-panel"),
+      raw_recipe("basic-accumulator"),
+    ]
   end
 end
 
