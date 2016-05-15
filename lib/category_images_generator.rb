@@ -21,6 +21,6 @@ class CategoryImagesGenerator
   end
 
   def default_png
-    File.binread("default.png")
+    File.binread("category.png")
   end
 end
