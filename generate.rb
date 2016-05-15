@@ -31,6 +31,12 @@ class ModData
     ]
   end
 
+  def resources
+    [
+      GoldOreResource.new,
+    ]
+  end
+
   def categories
     subgroups.map(&:category).uniq { |x| x.name }
   end
@@ -48,22 +54,6 @@ class ModData
   end
 end
 
-class GenericItem
-  def name
-    self.class.name.gsub(/[A-Z]/, ' \0').strip.gsub(" ", "-").downcase
-  end
-end
-
-class ModSubgroup < GenericItem
-  # default: at end
-  def order
-    "z-z"
-  end
-end
-
-class MiscSubgroup < ModSubgroup
-end
-
 class FirstHackGroup < ModSubgroup
   def category
     HackCategory.new
@@ -73,34 +63,6 @@ end
 class SecondHackGroup < ModSubgroup
   def category
     HackCategory.new
-  end
-end
-
-class ModItem < GenericItem
-  def subgroup
-    MiscSubgroup.new
-  end
-
-  def icon
-    "graphics/default.png"
-  end
-
-  def flags
-    ["goes-to-main-inventory"]
-  end
-
-  # default: at end
-  def order
-    "z-z"
-  end
-
-  # default
-  def stack_size
-    100
-  end
-
-  def type
-    "item"
   end
 end
 
@@ -118,11 +80,6 @@ end
 
 class ModCategory < GenericItem
   # default: at end
-  def order
-    "z-z"
-  end
-
-  # default: at end
   def inventory_order
     "z-z"
   end
@@ -133,50 +90,6 @@ class ModCategory < GenericItem
 end
 
 class HackCategory < ModCategory
-end
-
-class ModRecipe < GenericItem
-  # default: at end
-  def order
-    "z-z"
-  end
-
-  def energy_required
-    1
-  end
-
-  def enabled
-    true
-  end
-
-  def icon
-    results.first[1].icon
-  end
-
-  def craftable_by
-    :hand
-  end
-
-  def category
-    case craftable_by
-      when :hand
-        "crafting"
-      when :factory
-        "advanced-crafting"
-      when :smelting
-        "smelting"
-      when :chemistry
-        "chemistry"
-      when :fluid
-        "crafting-with-fluid"
-      when :refinery
-        "oil-processing"
-      when :rocket
-        "rocket-building"
-      else
-        fail "Unknown craftable_by #{craftable_by}"
-    end
-  end
 end
 
 class CreateStarItem < ModRecipe
@@ -262,38 +175,6 @@ class CheatingRecipe < ModRecipe
   end
 end
 
-class ModTechnology < GenericItem
-  # default: at end
-  def order
-    "z-z"
-  end
-
-  # default: at end
-  def inventory_order
-    "z-z"
-  end
-
-  def icon
-    "graphics/technology/default.png"
-  end
-
-  def prerequisites
-    []
-  end
-
-  def unlocked_recipes
-    []
-  end
-
-  def ingredient_count
-    75
-  end
-
-  def research_time
-    30
-  end
-end
-
 class SimpleTechnology < ModTechnology
   def ingredients
     [
@@ -348,6 +229,12 @@ class UnlockAllTheThings < ModTechnology
       raw_recipe("solar-panel"),
       raw_recipe("basic-accumulator"),
     ]
+  end
+end
+
+class GoldOreResource < ModOre
+  def result
+    raw_item("raw-wood")
   end
 end
 
