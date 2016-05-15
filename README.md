@@ -3,12 +3,15 @@ mod-generator
 
 Generates Factorio mods.
 
+## Supports
+
+Many game primitives, research
+
 ## TODO
 
-* Support game primitives
 * Overriding existing recipes
-* Research
 * Ores
+* Fluids
 * Generate text keys
 * License
 * Examples
