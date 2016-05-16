@@ -1,9 +1,5 @@
 require_relative "preload"
 
-Dir[File.dirname(__FILE__) + '/lib/*.rb'].each {|file| require file }
-
-# add a hacking category
-
 # All existing recipes that used to use iron-axe must now use this item instead.
 class NewIronAxeRecipe < ModRecipe
   def overrides
@@ -24,6 +20,46 @@ class NewIronAxeRecipe < ModRecipe
   end
 end
 
+class IronedStickRecipe < ModRecipe
+  def ingredients
+    [
+      [2, raw_item("iron-plate")],
+      [1, raw_item("raw-wood")],
+    ]
+  end
+
+  def results
+    [
+      [3, IronedStick.new],
+    ]
+  end
+end
+
+class NewIronStickRecipe < ModRecipe
+  def overrides
+    raw_recipe("iron-stick")
+  end
+
+  def ingredients
+    [
+      [1, IronedStick.new],
+      [1, raw_item("coal")],
+    ]
+  end
+
+  def results
+    [
+      [2, raw_item("iron-stick")],
+    ]
+  end
+end
+
+class IronedStick < ModItem
+  def description
+    "It's like ten thousand spoons"
+  end
+end
+
 class ModData
   def name
     "generated"
@@ -34,8 +70,8 @@ class ModData
       StarItem.new,
       BiggerStarItem.new,
 
-      # rewriting existing items
-      # NewIronAxe.new,
+      # new items
+      IronedStick.new,
     ]
   end
 
@@ -45,8 +81,11 @@ class ModData
       CreateBiggerStarItem.new,
       CheatingRecipe.new,
 
+      IronedStickRecipe.new,
+
       # override existing recipes
       NewIronAxeRecipe.new,
+      NewIronStickRecipe.new,
     ]
   end
 
@@ -65,19 +104,19 @@ class ModData
   end
 
   def categories
-    subgroups.map(&:category).compact.uniq { |x| x.name }
+    subgroups.map(&:category).compact.reject(&:base?).uniq { |x| x.name }
   end
 
   def recipe_categories
-    recipe_subgroups.map(&:category).compact.uniq { |x| x.name }
+    recipe_subgroups.map(&:category).compact.reject(&:base?).uniq { |x| x.name }
   end
 
   def recipe_subgroups
-    recipes.map(&:subgroup).compact.uniq { |x| x.name }
+    recipes.map(&:subgroup).compact.reject(&:base?).uniq { |x| x.name }
   end
 
   def subgroups
-    items.map(&:subgroup).compact.uniq { |x| x.name }
+    items.map(&:subgroup).compact.reject(&:base?).uniq { |x| x.name }
   end
 end
 
@@ -106,17 +145,6 @@ end
 class BiggerStarItem < ModItem
   def subgroup
     SecondHackGroup.new
-  end
-end
-
-class ModCategory < GenericItem
-  # default: at end
-  def inventory_order
-    "z-z"
-  end
-
-  def icon
-    "graphics/category/default.png"
   end
 end
 
@@ -189,6 +217,7 @@ class CheatingRecipe < ModRecipe
       [100, raw_item("electronic-circuit")],
       [100, raw_item("advanced-circuit")],
       [100, raw_item("plastic-bar")],
+      [100, raw_item("coal")],
       [10, raw_item("lab")],
       [50, raw_item("solar-panel")],
       [50, raw_item("big-electric-pole")],

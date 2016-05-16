@@ -47,6 +47,10 @@ class RawItem < ModItem
   def icon
     "__base__/graphics/icons/#{name}.png"
   end
+
+  def base?
+    true
+  end
 end
 
 def raw_item(key)

@@ -6,6 +6,10 @@ class RawTechnology < ModTechnology
   def name
     @name
   end
+
+  def base?
+    true
+  end
 end
 
 def raw_technologies

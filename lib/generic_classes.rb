@@ -20,14 +20,29 @@ class GenericItem
 end
 
 class ModSubgroup < GenericItem
+  def base?
+    false
+  end
 end
 
-class MiscSubgroup < ModSubgroup
+# a built-in; TODO have a list of built-in subgroups and categories
+class RawResourceSubgroup < ModSubgroup
+  def name
+    "raw-resource"
+  end
+
+  def base?
+    true
+  end
+
+  def category
+    nil
+  end
 end
 
 class ModItem < GenericItem
   def subgroup
-    MiscSubgroup.new
+    RawResourceSubgroup.new
   end
 
   def icon
@@ -45,6 +60,10 @@ class ModItem < GenericItem
 
   def type
     "item"
+  end
+
+  def base?
+    false
   end
 end
 
@@ -71,6 +90,10 @@ class ModRecipe < GenericItem
 
   def subgroup
     nil
+  end
+
+  def base?
+    false
   end
 
   def category
@@ -132,6 +155,10 @@ class ModTechnology < GenericItem
   def description
     "Lets you do things with #{name}"
   end
+
+  def base?
+    false
+  end
 end
 
 class Colour
@@ -179,5 +206,20 @@ class ModOre < GenericItem
 
   def mining_time
     2
+  end
+end
+
+class ModCategory < GenericItem
+  # default: at end
+  def inventory_order
+    "z-z"
+  end
+
+  def icon
+    "graphics/category/default.png"
+  end
+
+  def base?
+    false
   end
 end

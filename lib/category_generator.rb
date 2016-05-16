@@ -54,7 +54,7 @@ class CategoryGenerator
   def subgroup_json(subgroup)
     {
       type: "item-subgroup",
-      group: subgroup.category.name,
+      group: subgroup.category.try!(:name),
       name: subgroup.name,
       order: subgroup.order,
     }

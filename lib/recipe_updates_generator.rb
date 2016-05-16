@@ -21,9 +21,19 @@ class RecipeUpdatesGenerator
   end
 
   def generate_updates
-    data.recipes.select { |recipe| recipe.overrides }.map do |recipe|
+    "
+#{delete_existing_recipes}
+    "
+  end
+
+  def delete_existing_recipes
+    recipes.map do |recipe|
       "remove_recipe('#{recipe.overrides.name}')"
     end.join("\n")
+  end
+
+  def recipes
+    data.recipes.select { |recipe| recipe.overrides }
   end
 
   def extended_data
