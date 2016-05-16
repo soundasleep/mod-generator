@@ -10,5 +10,6 @@ class NilClass
   end
 end
 
+Dir[File.dirname(__FILE__) + '/lib/generic_item.rb'].each { |file| require file }
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 Dir[File.dirname(__FILE__) + '/lib/*/*.rb'].each { |file| require file }
