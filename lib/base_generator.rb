@@ -28,7 +28,7 @@ module BaseGenerator
     elsif value.is_a?(String)
       "\"" + value + "\""
     elsif value.is_a?(Hash)
-      "{" + value.map do |key, v|
+      "{" + value.reject { |key, v| v.nil? }.map do |key, v|
         "#{key} = #{value_to_lua(v)}"
       end.join(",\n") + "}"
     elsif value.is_a?(Array)
@@ -39,6 +39,9 @@ module BaseGenerator
   end
 
   def mod_path(path)
+    # already got an absolute path?
+    return path if path[0, 2] == "__"
+
     "__#{data.name}__/#{path}"
   end
 

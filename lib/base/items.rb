@@ -27,7 +27,7 @@ def raw_items
     "tank", "train-stop",
 
     # mining-tools.lua
-    "steel-axe",
+    "steel-axe", "iron-axe",
   ]
 end
 
@@ -42,6 +42,10 @@ class RawItem < ModItem
 
   def type
     "item"
+  end
+
+  def icon
+    "__base__/graphics/icons/#{name}.png"
   end
 end
 

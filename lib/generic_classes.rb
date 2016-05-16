@@ -58,11 +58,19 @@ class ModRecipe < GenericItem
   end
 
   def icon
-    results.first[1].icon
+    if results.size == 1
+      results.first[1].icon
+    else
+      "graphics/default.png"
+    end
   end
 
   def craftable_by
     :hand
+  end
+
+  def subgroup
+    nil
   end
 
   def category
@@ -88,6 +96,10 @@ class ModRecipe < GenericItem
 
   def description
     fail "Recipes don't have descriptions"
+  end
+
+  def overrides
+    nil
   end
 end
 

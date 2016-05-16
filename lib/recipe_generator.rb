@@ -38,7 +38,7 @@ class RecipeGenerator
       name: recipe.name,
       energy_required: recipe.energy_required,
       enabled: recipe.enabled,
-      subgroup: recipe.subgroup.name,
+      subgroup: recipe.subgroup.try!(:name),
       category: recipe.category,
       ingredients: to_ingredients(recipe.ingredients),
       results: to_ingredients(recipe.results),

@@ -14,12 +14,15 @@ class ModGenerator
     write_file! "info.json", JSON.pretty_generate(generate_info)
     write_file! "data.lua", generate_data
     write_file! "data-updates.lua", generate_data_updates
+    write_file! "library.lua", File.binread("library.lua")
 
     CategoryGenerator.new(target, data).generate!
     ItemGenerator.new(target, data).generate!
     RecipeGenerator.new(target, data).generate!
     TechnologyGenerator.new(target, data).generate!
     ResourceGenerator.new(target, data).generate!
+
+    RecipeUpdatesGenerator.new(target, data).generate!
 
     ImagesGenerator.new(target, data).generate!
     CategoryImagesGenerator.new(target, data).generate!
@@ -52,6 +55,8 @@ class ModGenerator
 
   def generate_data
     '
+    require("library")
+
     require("prototypes.category")
     require("prototypes.items")
     require("prototypes.recipes")
@@ -66,7 +71,9 @@ class ModGenerator
 
   def generate_data_updates
     '
-    -- currently empty
+    require("library")
+
+    require("prototypes.recipes-updates")
     '
   end
 end

@@ -4,6 +4,26 @@ Dir[File.dirname(__FILE__) + '/lib/*.rb'].each {|file| require file }
 
 # add a hacking category
 
+# All existing recipes that used to use iron-axe must now use this item instead.
+class NewIronAxeRecipe < ModRecipe
+  def overrides
+    raw_recipe("iron-axe")
+  end
+
+  def ingredients
+    [
+      [2, raw_item("iron-stick")],
+      [4, raw_item("iron-plate")],
+    ]
+  end
+
+  def results
+    [
+      [2, raw_item("iron-axe")],
+    ]
+  end
+end
+
 class ModData
   def name
     "generated"
@@ -12,7 +32,10 @@ class ModData
   def items
     [
       StarItem.new,
-      BiggerStarItem.new
+      BiggerStarItem.new,
+
+      # rewriting existing items
+      # NewIronAxe.new,
     ]
   end
 
@@ -21,6 +44,9 @@ class ModData
       CreateStarItem.new,
       CreateBiggerStarItem.new,
       CheatingRecipe.new,
+
+      # override existing recipes
+      NewIronAxeRecipe.new,
     ]
   end
 
@@ -39,19 +65,19 @@ class ModData
   end
 
   def categories
-    subgroups.map(&:category).uniq { |x| x.name }
+    subgroups.map(&:category).compact.uniq { |x| x.name }
   end
 
   def recipe_categories
-    recipe_subgroups.map(&:category).uniq { |x| x.name }
+    recipe_subgroups.map(&:category).compact.uniq { |x| x.name }
   end
 
   def recipe_subgroups
-    recipes.map(&:subgroup).uniq { |x| x.name }
+    recipes.map(&:subgroup).compact.uniq { |x| x.name }
   end
 
   def subgroups
-    items.map(&:subgroup).uniq { |x| x.name }
+    items.map(&:subgroup).compact.uniq { |x| x.name }
   end
 end
 
