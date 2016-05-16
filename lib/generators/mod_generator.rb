@@ -18,6 +18,7 @@ class ModGenerator
 
     CategoryGenerator.new(target, data).generate!
     ItemGenerator.new(target, data).generate!
+    FluidGenerator.new(target, data).generate!
     RecipeGenerator.new(target, data).generate!
     TechnologyGenerator.new(target, data).generate!
     ResourceGenerator.new(target, data).generate!
@@ -59,6 +60,7 @@ class ModGenerator
 
     require("prototypes.category")
     require("prototypes.items")
+    require("prototypes.fluids")
     require("prototypes.recipes")
     require("prototypes.technology")
     require("prototypes.resources")

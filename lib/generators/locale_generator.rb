@@ -35,6 +35,10 @@ class LocaleGenerator
 #{to_ini(item_descriptions)}
 
 [fluid-name]
+#{to_ini(fluid_names)}
+
+[fluid-description]
+#{to_ini(fluid_descriptions)}
 
 [recipe-name]
 #{to_ini(recipe_names)}
@@ -67,6 +71,14 @@ class LocaleGenerator
 
   def item_descriptions
     descriptions_for(data.items)
+  end
+
+  def fluid_names
+    labels_for(data.fluids)
+  end
+
+  def fluid_descriptions
+    descriptions_for(data.fluids)
   end
 
   def autoplace_control_names

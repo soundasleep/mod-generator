@@ -5,13 +5,13 @@ Generates Factorio mods.
 
 ## Supports
 
-Many game primitives, inventory items, research, ores, text keys, overriding existing recipes
+Many game primitives, inventory items, research, ores, fluids, text keys, overriding existing recipes
 
 ## TODO
 
 * Recipes have build times
-* Fluids
 * Buildable things
+* Buildings
 * Consumable things
 * License
 * Electricity

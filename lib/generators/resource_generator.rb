@@ -96,14 +96,6 @@ class ResourceGenerator
     }
   end
 
-  def to_colour(c)
-    {
-      r: c.r,
-      g: c.g,
-      b: c.b,
-    }
-  end
-
   def generate_peaks(resource)
     [
       {

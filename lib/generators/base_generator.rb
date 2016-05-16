@@ -51,4 +51,12 @@ module BaseGenerator
       "#{key}=#{value}"
     end.join("\n")
   end
+
+  def to_colour(c)
+    {
+      r: c.r,
+      g: c.g,
+      b: c.b,
+    }
+  end
 end

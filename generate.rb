@@ -60,6 +60,38 @@ class IronedStick < ModItem
   end
 end
 
+class DirtyWater < ModFluid
+  def description
+    "Ewww"
+  end
+
+  def colour
+    Colour.new(0.5, 0.5, 0.2)
+  end
+end
+
+class DirtyWaterRecipe < ModRecipe
+  def ingredients
+    [
+      [1, raw_fluid("water")],
+    ]
+  end
+
+  def results
+    [
+      [2, DirtyWater.new],
+    ]
+  end
+
+  def energy_required
+    10
+  end
+
+  def craftable_by
+    :chemistry
+  end
+end
+
 class ModData
   def name
     "generated"
@@ -83,6 +115,8 @@ class ModData
 
       IronedStickRecipe.new,
 
+      DirtyWaterRecipe.new,
+
       # override existing recipes
       NewIronAxeRecipe.new,
       NewIronStickRecipe.new,
@@ -94,6 +128,12 @@ class ModData
       SimpleTechnology.new,
       UnlockAllTheThings.new,
       BlockedTechnology.new,
+    ]
+  end
+
+  def fluids
+    [
+      DirtyWater.new,
     ]
   end
 
@@ -218,6 +258,7 @@ class CheatingRecipe < ModRecipe
       [100, raw_item("advanced-circuit")],
       [100, raw_item("plastic-bar")],
       [100, raw_item("coal")],
+      [10, raw_item("storage-tank")],
       [10, raw_item("lab")],
       [50, raw_item("solar-panel")],
       [50, raw_item("big-electric-pole")],
