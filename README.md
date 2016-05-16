@@ -9,6 +9,7 @@ Many game primitives, inventory items, research, ores, text keys, overriding exi
 
 ## TODO
 
+* Recipes have build times
 * Fluids
 * Buildable things
 * Consumable things
