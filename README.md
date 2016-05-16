@@ -5,11 +5,10 @@ Generates Factorio mods.
 
 ## Supports
 
-Many game primitives, inventory items, research, ores
+Many game primitives, inventory items, research, ores, text keys
 
 ## TODO
 
-* Generate text keys
 * Overriding existing recipes
 * Fluids
 * Buildable things

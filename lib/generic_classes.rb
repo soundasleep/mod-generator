@@ -9,6 +9,14 @@ class GenericItem
   def order
     "z-z"
   end
+
+  def label
+    self.class.name
+  end
+
+  def description
+    nil
+  end
 end
 
 class ModSubgroup < GenericItem
@@ -77,6 +85,10 @@ class ModRecipe < GenericItem
         fail "Unknown craftable_by #{craftable_by}"
     end
   end
+
+  def description
+    fail "Recipes don't have descriptions"
+  end
 end
 
 class ModTechnology < GenericItem
@@ -103,6 +115,10 @@ class ModTechnology < GenericItem
 
   def research_time
     30
+  end
+
+  def description
+    "Lets you do things with #{name}"
   end
 end
 

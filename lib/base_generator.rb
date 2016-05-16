@@ -2,7 +2,10 @@ require "json"
 
 module BaseGenerator
   def create_dir!
-    Dir.mkdir("#{target}#{root_path}") unless Dir.exist?("#{target}#{root_path}")
+    # create parent dir if necessary
+    ["../", ""].each do |parent_dir|
+      Dir.mkdir("#{target}#{root_path}#{parent_dir}") unless Dir.exist?("#{target}#{root_path}#{parent_dir}")
+    end
   end
 
   def write_file!(filename, content)
@@ -11,9 +14,6 @@ module BaseGenerator
     File.open "#{target}#{root_path}#{filename}", 'wb' do |file|
       file.write(content)
     end
-
-    # puts content
-    # puts ""
   end
 
   def to_lua(json)
@@ -40,5 +40,12 @@ module BaseGenerator
 
   def mod_path(path)
     "__#{data.name}__/#{path}"
+  end
+
+  def to_ini(pairs)
+    pairs.map do |pair|
+      key, value = pair
+      "#{key}=#{value}"
+    end.join("\n")
   end
 end

@@ -25,6 +25,8 @@ class ModGenerator
     CategoryImagesGenerator.new(target, data).generate!
     TechnologyImagesGenerator.new(target, data).generate!
     ResourceImagesGenerator.new(target, data).generate!
+
+    LocaleGenerator.new(target, data).generate!
   end
 
   private

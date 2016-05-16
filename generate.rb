@@ -71,6 +71,10 @@ class StarItem < ModItem
   def subgroup
     FirstHackGroup.new
   end
+
+  def description
+    "This is amazing!"
+  end
 end
 
 class BiggerStarItem < ModItem
@@ -190,6 +194,10 @@ class SimpleTechnology < ModTechnology
   def research_time
     1
   end
+
+  def description
+    "Basically a noop."
+  end
 end
 
 class BlockedTechnology < ModTechnology
@@ -262,6 +270,10 @@ class UnlockAllTheThings < ModTechnology
       raw_recipe("solid-fuel-from-heavy-oil"),
       raw_recipe("lubricant"),
     ]
+  end
+
+  def description
+    "Unlocks all of the things so we can research all of the things."
   end
 end
 
