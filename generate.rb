@@ -28,6 +28,7 @@ class ModData
     [
       SimpleTechnology.new,
       UnlockAllTheThings.new,
+      BlockedTechnology.new,
     ]
   end
 
@@ -191,6 +192,29 @@ class SimpleTechnology < ModTechnology
   end
 end
 
+class BlockedTechnology < ModTechnology
+  def prerequisites
+    [
+      raw_technology("steel-processing"),
+      SimpleTechnology.new,
+    ]
+  end
+
+  def ingredients
+    [
+      [1, raw_item("science-pack-1")],
+    ]
+  end
+
+  def ingredient_count
+    10
+  end
+
+  def research_time
+    2
+  end
+end
+
 class UnlockAllTheThings < ModTechnology
   def prerequisites
     [
@@ -228,6 +252,15 @@ class UnlockAllTheThings < ModTechnology
       raw_recipe("stone-wall"),
       raw_recipe("solar-panel"),
       raw_recipe("basic-accumulator"),
+      # oil-processing
+      raw_recipe("pumpjack"),
+      raw_recipe("oil-refinery"),
+      raw_recipe("chemical-plant"),
+      raw_recipe("basic-oil-processing"),
+      raw_recipe("solid-fuel-from-light-oil"),
+      raw_recipe("solid-fuel-from-petroleum-gas"),
+      raw_recipe("solid-fuel-from-heavy-oil"),
+      raw_recipe("lubricant"),
     ]
   end
 end
