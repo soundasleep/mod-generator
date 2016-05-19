@@ -1,64 +1,79 @@
 require_relative "preload"
 
+require "yaml"
+
+types = {
+  recipes: YamlRecipe,
+  items: YamlItem,
+}
+
+runtime = types.map do |path, classname|
+  classes = Dir[File.dirname(__FILE__) + '/game/' + path.to_s + '/*.yml'].map do |file|
+    classname.new(file)
+  end
+  [path, Hash[classes.map { |c| [c.name, c] }]]
+end
+RUNTIME = Hash[runtime]
+
 # All existing recipes that used to use iron-axe must now use this item instead.
-class NewIronAxeRecipe < ModRecipe
-  def overrides
-    raw_recipe("iron-axe")
-  end
+# class NewIronAxeRecipe < ModRecipe
+#   def overrides
+#     raw_recipe("iron-axe")
+#   end
 
-  def ingredients
-    [
-      [2, raw_item("iron-stick")],
-      [4, raw_item("iron-plate")],
-    ]
-  end
+#   def ingredients
+#     [
+#       [2, raw_item("iron-stick")],
+#       [4, raw_item("iron-plate")],
+#     ]
+#   end
 
-  def results
-    [
-      [2, raw_item("iron-axe")],
-    ]
-  end
-end
+#   def results
+#     [
+#       [2, raw_item("iron-axe")],
+#     ]
+#   end
+# # end
 
-class IronedStickRecipe < ModRecipe
-  def ingredients
-    [
-      [2, raw_item("iron-plate")],
-      [1, raw_item("raw-wood")],
-    ]
-  end
+# class IronedStickRecipe < ModRecipe
+#   def ingredients
+#     [
+#       [2, raw_item("iron-plate")],
+#       [1, raw_item("raw-wood")],
+#     ]
+#   end
 
-  def results
-    [
-      [3, IronedStick.new],
-    ]
-  end
-end
+#   def results
+#     [
+#       [3, IronedStick.new],
+#     ]
+#   end
+# end
 
-class NewIronStickRecipe < ModRecipe
-  def overrides
-    raw_recipe("iron-stick")
-  end
+# class NewIronStickRecipe < ModRecipe
+#   def overrides
+#     raw_recipe("iron-stick")
+#   end
 
-  def ingredients
-    [
-      [1, IronedStick.new],
-      [1, raw_item("coal")],
-    ]
-  end
+#   def ingredients
+#     [
+#       [1, IronedStick.new],
+#       [1, raw_item("coal")],
+#     ]
+#   end
 
-  def results
-    [
-      [2, raw_item("iron-stick")],
-    ]
-  end
-end
+#   def results
+#     [
+#       [2, raw_item("iron-stick")],
+#     ]
+#   end
+# end
 
-class IronedStick < ModItem
-  def description
-    "It's like ten thousand spoons"
-  end
-end
+# class IronedStick < ModItem
+#   def description
+#     "It's like ten thousand spoons"
+#   end
+# end
 
 class DirtyWater < ModFluid
   def description
@@ -103,8 +118,8 @@ class ModData
       BiggerStarItem.new,
 
       # new items
-      IronedStick.new,
-    ]
+      # IronedStick.new,
+    ] + RUNTIME[:items].values
   end
 
   def recipes
@@ -113,14 +128,14 @@ class ModData
       CreateBiggerStarItem.new,
       CheatingRecipe.new,
 
-      IronedStickRecipe.new,
+      # IronedStickRecipe.new,
 
       DirtyWaterRecipe.new,
 
       # override existing recipes
-      NewIronAxeRecipe.new,
-      NewIronStickRecipe.new,
-    ]
+      # NewIronAxeRecipe.new,
+      # NewIronStickRecipe.new,
+    ] + RUNTIME[:recipes].values
   end
 
   def technologies

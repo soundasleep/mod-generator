@@ -1,0 +1,8 @@
+overrides: iron-axe
+
+ingredients:
+  - 2 iron-stick
+  - 4 iron-plate
+
+results:
+  - 2 iron-axe

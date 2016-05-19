@@ -9,7 +9,7 @@ class GenericItem
   end
 
   def label
-    self.class.name
+    name.split("-").map(&:capitalize).join(" ")
   end
 
   def description

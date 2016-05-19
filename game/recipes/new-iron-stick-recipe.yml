@@ -1,0 +1,10 @@
+label: Iron Stick (new)
+
+overrides: iron-stick
+
+ingredients:
+  - 1 ironed-stick
+  - 1 coal
+
+results:
+  - 2 iron-stick
