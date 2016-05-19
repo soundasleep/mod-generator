@@ -1,0 +1,9 @@
+ingredients:
+  - 1 raw-wood
+
+results:
+  - 1 star-item
+
+subgroup: first-hack-group
+
+craftable_by: smelting

@@ -1,0 +1,9 @@
+prerequisites:
+  - steel-processing
+  - simple-technology
+
+ingredients:
+  - 1 science-pack-1
+
+ingredient_count: 10
+research_time: 2

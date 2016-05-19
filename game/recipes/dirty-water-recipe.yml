@@ -1,0 +1,9 @@
+ingredients:
+  - 1 water
+
+results:
+  - 2 dirty-water
+
+energy_required: 10
+
+craftable_by: chemistry

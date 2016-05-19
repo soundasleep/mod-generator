@@ -1,0 +1,23 @@
+ingredients:
+  - 1 raw-wood
+
+results:
+  - 100 iron-plate
+  - 100 copper-plate
+  - 100 stone-brick
+  - 100 steel-plate
+  - 100 battery
+  - 100 electronic-circuit
+  - 100 advanced-circuit
+  - 100 plastic-bar
+  - 100 coal
+  - 10 storage-tank
+  - 10 lab
+  - 50 solar-panel
+  - 50 big-electric-pole
+  - 50 science-pack-1
+  - 50 science-pack-2
+
+subgroup: first-hack-group
+
+craftable_by: hand

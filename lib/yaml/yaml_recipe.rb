@@ -26,4 +26,12 @@ class YamlRecipe < ModRecipe
       super
     end
   end
+
+  def energy_required
+    yaml["energy_required"] || super
+  end
+
+  def craftable_by
+    yaml["craftable_by"].try!(:to_sym) || super
+  end
 end

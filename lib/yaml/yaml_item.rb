@@ -1,7 +1,7 @@
 class YamlItem < ModItem
   include YamlHelpers
 
-  def description
-    yaml["description"] || super
+  def enabled
+    yaml["enabled"] || super
   end
 end

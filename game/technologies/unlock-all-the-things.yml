@@ -1,0 +1,32 @@
+prerequisites:
+  - simple-technology
+
+ingredients:
+  - 1 science-pack-1
+
+ingredient_count: 1
+research_time: 1
+
+unlocked_recipes:
+  - create-bigger-star-item
+  - steel-plate
+  - steel-axe
+  - assembling-machine-1
+  - assembling-machine-2
+  - assembling-machine-3
+  - electronic-circuit
+  - advanced-circuit
+  - processing-unit
+  - science-pack-3
+  - fast-inserter
+  - stone-wall
+  - solar-panel
+  - basic-accumulator
+  - pumpjack
+  - oil-refinery
+  - chemical-plant
+  - basic-oil-processing
+  - solid-fuel-from-light-oil
+  - lubricant
+
+description: Unlocks all of the things so that we can build all of the things.

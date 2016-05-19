@@ -1,0 +1,12 @@
+ingredients:
+  - 2 raw-wood
+
+results:
+  - 1 star-item
+  - 1 bigger-star-item
+
+subgroup: first-hack-group
+
+craftable_by: chemistry
+
+enabled: false
