@@ -1,0 +1,36 @@
+type: radar
+item: better-radar
+
+mining_hardness: 0.1
+mining_time: 0.1
+
+width: 3
+height: 3
+blocking: true
+health: 1000
+
+# pictures
+picture: __base__/graphics/entity/radar/radar.png
+picture_width: 153
+picture_height: 131
+frames_width: 8
+frames_height: 8
+
+# no freaking idea
+frames_shift: 0.1 0.1
+
+# sounds
+working_sound: __base__/sound/radar.ogg
+working_volume: 4
+
+# specific to electric things
+electricity_priority: 2
+power: 3kW
+
+# specific to radar
+energy_per_sector: 1kJ
+max_distance_of_sector_revealed: 200
+max_distance_of_nearby_sector_revealed: 50
+energy_per_nearby_scan: 1kJ
+
+

@@ -5,7 +5,7 @@ Generates Factorio mods.
 
 ## Supports
 
-Many game primitives, inventory items, research, ores, fluids, text keys, overriding existing recipes
+Many game primitives, inventory items, research, ores, fluids, text keys, overriding existing recipes, some buildings (radar), loading data from YML
 
 ## TODO
 
@@ -15,8 +15,7 @@ Many game primitives, inventory items, research, ores, fluids, text keys, overri
 * Consumable things
 * License
 * Electricity
-* Examples
-* Load mod data from a file, not hardcoded Ruby
+* Examples and HOWTO
 
 ## Much later
 

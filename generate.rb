@@ -10,6 +10,7 @@ types = {
   categories: YamlCategory,
   technologies: YamlTechnology,
   resources: YamlResource,
+  buildings: YamlBuilding,
 }
 
 runtime = types.map do |path, classname|
@@ -43,6 +44,10 @@ class ModData
 
   def resources
     RUNTIME[:resources].values
+  end
+
+  def entities
+    RUNTIME[:buildings].values
   end
 
   def categories

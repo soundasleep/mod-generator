@@ -11,6 +11,10 @@ class ModItem < GenericItem
     ["goes-to-main-inventory"]
   end
 
+  def place_result
+    nil
+  end
+
   # default
   def stack_size
     100

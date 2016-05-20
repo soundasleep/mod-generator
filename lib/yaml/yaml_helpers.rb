@@ -6,6 +6,10 @@ module YamlHelpers
     @name = File.basename(file, ".yml")
   end
 
+  def method_missing(method)
+    yaml[method.to_s] || fail("Did not find any yaml #{method}")
+  end
+
   def name
     @name
   end
@@ -47,6 +51,20 @@ module YamlHelpers
       raw_technology(key)
     else
       fail "Unknown key #{key}: not a runtime technology or a raw technology"
+    end
+  end
+
+  def has_runtime_entity?(key)
+    RUNTIME[:buildings][key] || raw_entities.include?(key)
+  end
+
+  def runtime_entity(key)
+    if RUNTIME[:buildings][key]
+      RUNTIME[:buildings][key]
+    elsif raw_entities.include?(key)
+      raw_entity(key)
+    else
+      fail "Unknown key #{key}: not a runtime entity or a raw entity"
     end
   end
 

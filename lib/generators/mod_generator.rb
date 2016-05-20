@@ -22,6 +22,7 @@ class ModGenerator
     RecipeGenerator.new(target, data).generate!
     TechnologyGenerator.new(target, data).generate!
     ResourceGenerator.new(target, data).generate!
+    EntityGenerator.new(target, data).generate!
 
     RecipeUpdatesGenerator.new(target, data).generate!
 
@@ -63,6 +64,7 @@ class ModGenerator
     require("prototypes.fluids")
     require("prototypes.recipes")
     require("prototypes.technology")
+    require("prototypes.entities")
     require("prototypes.resources")
     require("prototypes.noise-layers")
     require("prototypes.autoplace-controls")
